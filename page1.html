@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lakhma</title>
+    <link rel="icon" type="image/x-icon" href="images\favicon.ico">
+    <link rel="stylesheet" href="page1.css">
+    <script src="page1.js"></script> 
+  </head>
+  
+  <body>
+
+    <!--button to change language-->  
+    <nav id = "languageSwitcher">
+      <button class="language" onclick = "changeLanguage('en')"> English </button>
+      <button class="language ar" onclick = "changeLanguage('ar')"> العربية </button>
+      
+      <!--how to play button-->
+      <div  class="how_to_play">
+        
+        <!--how to play_button-->
+        <button id="1" class="howtoplay" onclick="document.getElementById('introform').style.display='block' "style="width:auto;">how to play</button>
+        
+        <!--how to play form-->
+        <div id="introform" class="modal">
+          <form class="modal-content animate" action="/action_page.php" method="post">
+            
+            <!--x-sign-->
+            <div class="imgcontainer">
+             <span onclick="document.getElementById('introform').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+              
+            <!--form-container-->
+            <div class="container">
+              <h1 id="2" style="text-align: center;">How to play</h1>
+              <p id="3">if the color of the text is black then the answer will be the background color</p>
+              <p id="4">otherwise the answer will be the text color</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+    
+  
+    <!--main contenier contain logo, name of the game and start button-->
+    <div class="maincontainer">
+        
+      <!--logo_image-->
+      <img src="images\logo.png" alt="logo" width="500" height="300" >
+      <p> </p>
+        
+      <!--game_name-->
+      <div class="gamename"><img src="images/la.jpeg" alt="la" ></div>
+        
+      <!--start_button-->
+      <button id="5" class="play" onclick="document.getElementById('logform').style.display='block'" style="width:auto;">Play</button>
+        
+      <!--logform-->
+      <div id="logform" class="modal">
+          
+        <form class="modal-content animate" action="/action_page.php" method="post">
+            
+          <!--x-sign-->
+          <div class="imgcontainer">
+           <span onclick="document.getElementById('logform').style.display='none'" class="close" title="Close Modal">&times;</span>
+          </div>
+            
+          <!--form-container-->
+          <div class="container">
+            <label class="name" id="6" for="uname"><b>Enter your name</b></label>
+            <input type="text" name="uname" required>
+            <button class="start" id="7" type="submit">Start</button>
+          </div>
+        </form>
+      </div>
+        
+    </div>
+  </body>
+</html>
