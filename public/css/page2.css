@@ -1,0 +1,132 @@
+body {
+    background-color: #E06666;
+}
+
+/* chat container*/
+
+.chatcontainer{
+    background-color: cornsilk;
+    width: 400px;
+    height: 300px;
+    float: right;
+    margin-top: 320px;
+    border: #7a3b3b solid;
+}
+
+.chattext{
+   width: 75%;
+   height: 10%; 
+   margin-top: 250px;
+   margin-left: 10px;
+}
+
+.send{
+    height: 10%;
+    width: 15%;
+}
+
+/*play board*/
+
+.playbord{
+    background-color: #f1c232;
+    width: 67%;
+    height: 610px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: brown solid;
+}
+
+.card{
+    
+    width: 60px;
+    height: 80px;
+    background-color: #990000;
+    border: white solid;
+}
+
+.one{
+    float: right;    
+}
+.onecard{
+    position: absolute;
+    left: 275px;
+    width: 330px;
+    height: 87px;
+    margin: 0;
+    background-color: rgb(74, 168, 55);
+}
+
+
+.two{
+    
+    
+    width: 80px;
+    height: 60px;
+    
+}
+
+.twocard{
+    position: absolute;
+    top:160px;
+    width: 87px;
+    height: 330px;
+    background-color: antiquewhite;
+    left: 839px;
+}
+.three{
+    float: right;
+    
+}
+
+.threecard{
+    position: absolute;
+    top:535px;
+    left: 275px;
+    width: 330px;
+    height: 87px;
+    background-color: rgb(37, 105, 165);
+   
+}
+
+.four{
+    
+    width: 80px;
+    height: 60px;
+}
+
+.fourcard{
+    position: absolute;
+    width: 87px;
+    top:160px;
+    height: 330px;
+    background-color: antiquewhite;
+}
+
+.five{
+    position: absolute;
+    top: 250px;
+    left: 400px;
+    width: 80px;
+    height: 100px;
+}
+
+.choice{
+    position: absolute;
+    width: 60px;
+    background-color: #dfd9d9;
+    height: 30px;
+}
+#choice1{
+    top:450px;
+    left: 300px;
+}
+
+#choice2{
+    top:450px;
+    left: 390px;
+}
+
+#choice3{
+    top:450px;
+    left: 480px;
+}
