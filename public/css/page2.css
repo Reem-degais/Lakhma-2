@@ -1,19 +1,25 @@
 body {
     background-color: #E06666;
+    margin: 1px;
 }
 
 /* chat container*/
 
 .chatcontainer{
+    
     background-color: cornsilk;
-    width: 400px;
-    height: 300px;
+    width: auto;
+    height: auto;
     float: right;
     margin-top: 320px;
     border: #7a3b3b solid;
 }
 
+.chatt{
+    position: fixed;
+}
 .chattext{
+
    width: 75%;
    height: 10%; 
    margin-top: 250px;
@@ -23,91 +29,214 @@ body {
 .send{
     height: 10%;
     width: 15%;
+    
 }
 
 /*play board*/
 
 .playbord{
-    background-color: #f1c232;
-    width: 67%;
-    height: 610px;
+    position: relative;
+    background-color: #f1c232 ;
+    width: auto;
+    height: auto;
     margin-top: 10px;
     margin-left: 10px;
     border: brown solid;
 }
 
 .card{
-    
-    width: 60px;
-    height: 80px;
+
     background-color: #990000;
-    border: white solid;
+    border: black solid 1px;
 }
 
+/*--------------------player1 cards-------------------*/
 .one{
-    float: right;    
-}
-.onecard{
     position: absolute;
-    left: 275px;
-    width: 330px;
-    height: 87px;
-    margin: 0;
-    background-color: rgb(74, 168, 55);
-}
-
-
-.two{
-    
-    
-    width: 80px;
-    height: 60px;
-    
-}
-
-.twocard{
-    position: absolute;
-    top:160px;
-    width: 87px;
-    height: 330px;
-    background-color: antiquewhite;
-    left: 839px;
-}
-.three{
     float: right;
-    
+    width: 60px;
+    height: 80px; 
+      
 }
 
-.threecard{
+#o1{
+    left: 550px;
+}
+#o2{
+    left: 500px;
+}
+#o3{
+    left:450px;
+}
+#o4{
+    left: 400px;
+}
+#o5{
+    left:350px;
+}
+.pic1{
+
+    width: 40px; 
+    height: 40px; 
+    transform: scaleY(-1);
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+/*------------------player2 cards--------------------*/
+.two{
     position: absolute;
-    top:535px;
-    left: 275px;
-    width: 330px;
-    height: 87px;
-    background-color: rgb(37, 105, 165);
-   
+    left: 839px;
+    width: 80px;
+    height: 60px;
+    
+}
+#t1{
+    top:370px;
+}
+#t2{
+    top:320px;
+}
+#t3{
+    top:270px;
+}
+#t4{
+    top:220px;
+}
+#t5{
+    top:170px;
+}
+.pic2{
+    width: 40px; 
+    height: 40px;
+    transform: rotate(-90deg);
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
+/*----------------------player3 cards----------------*/
+.three{
+    position: absolute;
+    top: 537px;
+    width: 60px;
+    height: 80px;  
+}
+#th1{
+    left: 550px;
+}
+#th2{
+    left: 500px;
+}
+#th3{
+    left:450px;
+}
+#th4{
+    left: 400px;
+}
+#th5{
+    left:350px;
+}
+.pic3{
+    width: 40px; 
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 10px;  
+}
+
+/*----------------------player4 cards----------------------*/
 .four{
-    
+    position: absolute;
     width: 80px;
     height: 60px;
 }
 
-.fourcard{
-    position: absolute;
-    width: 87px;
-    top:160px;
-    height: 330px;
-    background-color: antiquewhite;
+#f1{
+    top:370px;
+}
+#f2{
+    top:320px;
+}
+#f3{
+    top:270px;
+}
+#f4{
+    top:220px;
+}
+#f5{
+    top:170px;
+}
+.pic4{
+    width: 40px; 
+    height: 40px;
+    transform: rotate(90deg);
+    margin-left: 20px;
+    margin-top: 10px;
+      
 }
 
+/*-----------------------main card --------------------------*/
 .five{
-    position: absolute;
+    position: fixed;
     top: 250px;
     left: 400px;
-    width: 80px;
-    height: 100px;
+    width: 90px;
+    height: 110px;
+    text-align: center;
+    font-size: larger;
+    background-color: aliceblue;
+    border: black solid 1px;
+    
+}
+/*---------------card color---------------------------------*/
+.five.red{
+    color: #990000;
+    
+}
+.five.black{
+    color: black;
+}
+.five.green{
+    color: green;
+}
+.five.blue{
+    color: blue;
+}
+.five.pink{
+    color: pink;
+}
+.five.purple{
+    color: purple;
+}
+.five.orange{
+    color: orangered
+}
+.five.yellow{
+    color: yellow;
+}
+/*----------------background color--------------------------------------*/
+.five.Red{
+    background-color: #990000;
+}
+.five.White{
+    background-color: white;
+}
+.five.Green{
+    background-color: green;
+}
+.five.Blue{
+    background-color: blue;
+}
+.five.Pink{
+    background-color: pink;
+}
+.five.Purple{
+    background-color: purple;
+}
+.five.Orange{
+    background-color: orangered
+}
+.five.Yellow{
+    background-color: yellow;
 }
 
 .choice{
@@ -129,4 +258,12 @@ body {
 #choice3{
     top:450px;
     left: 480px;
+}
+
+#timer{
+    background-color: white;
+    width: 60px;
+    text-align: center;
+    font-size: 30px;
+
 }
