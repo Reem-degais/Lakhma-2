@@ -40,19 +40,22 @@ io.on('connection', (socket) => {
                     p1name:arr[0],
                     p1value:"card one",
                     p1move:"",
-                    p1card:""
+                    p1card:"",
+                    key1:""
                 }
                 let p2obj={
                     p2name:arr[1],
                     p2value:"card three",
                     p2move:"",
-                    p2card:""
+                    p2card:"",
+                    key2:""
                 }
 
                 let obj={
                     p1:p1obj,
                     p2:p2obj,
-                    sum:1
+                    sum:1,
+                    term:""
                 }
                 playingArray.push(obj)
 
@@ -72,6 +75,8 @@ io.on('connection', (socket) => {
             objToChange.p1.p1move=e.id
             objToChange.p1.p1card=e.classes
             objToChange.sum++
+            objToChange.p1.key1=e.key
+            objToChange.term=e.term
         }
         else if(e.value=="card three"){
             let objToChange=playingArray.find(obj=>obj.p2.p2name==e.name)
@@ -79,10 +84,16 @@ io.on('connection', (socket) => {
             objToChange.p2.p2move=e.id
             objToChange.p1.p2card=e.classes
             objToChange.sum++
+            objToChange.p2.key2=e.key
+            objToChange.term=e.term
         }
 
         io.emit("playing",{allPlayers:playingArray})
 
+    })
+
+    socket.on("choices",(key)=>{
+      io.emit("choices", key)
     })
 })
 server.listen(8080, () => {

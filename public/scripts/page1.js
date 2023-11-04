@@ -183,6 +183,17 @@ document.querySelectorAll(".card").forEach(e=>{
         let classes = keycolor.className
         console.log(classes)
         socket.emit("playing", {value: value, id: e.id, name: myname, card: classes})
+        
+        document.addEventListener('click', function(evt) {
+            let element = evt.target;
+            let key = element.id
+            console.log(key)
+            /*clearInterval(timer);
+            ResetTimer(timer);*/
+            socket.emit('choices', {key: key})
+        })
+            
+        
     })
 })
 
@@ -195,7 +206,7 @@ socket.on("playing", (e) => {
     turn2 = foundObject.p2.p2name
     random1 = foundObject.p1.p1card
     random2 = foundObject.p2.p2card
-
+    
     /*exchage turns*/
     if ((foundObject.sum) % 2 == 0) {
         document.getElementById("whosTurn").innerText = turn2 + "'s turn"
@@ -206,14 +217,68 @@ socket.on("playing", (e) => {
 
     if (p1id != '') {
         document.getElementById(`${p1id}`).style.display ="none"
-        document.getElementById(`${p1id}`).disabled = true
-        node = document.createElement("div").classList.add(random1)
-        document.querySelector(".five").appendChild(node)
+        const timer = setInterval(() => {
+            timeleft--;
+              if (timeleft < 0) {
+              clearInterval(timer);
+              ResetTimer(timer);
+              console.log('Time is up!');
+              displayMessage('Time is up!');
+              
+              document.getElementById(`${p1id}`).style.display="block"
+            }
+            else{
+                document.getElementById("timer").innerHTML=`00:${timeleft}`}
+                socket.on("choices", (e)=>{
+                    keys = e.key
+                    let text = "black"
+                    clearInterval(timer);
+                    ResetTimer(timer);
+                    console.log(keys)
+                    if (text =="black"){
+                        if (keys == "choice2"){
+                            document.getElementById("rig").style.display="block"
+                            
+                        }
+                        else if(keys == "choice3" || keys =="choice1") {
+                            document.getElementById("wro").style.display="block"
+                          
+                            
+                        }
+                    }
+                    else {
+                        if (keys == "choice1"){
+                            document.getElementById("rig").style.display="block"
+                            
+                        }
+                        else if(keys == "choice3" || keys =="choice2") {
+                            document.getElementById("wro").style.display="block"
+                            
+                            
+                        }
+                    }
+                })
+            
+        },1000);    
+        
     }
     if (p2id != '') {
         document.getElementById(`${p2id}`).style.display ="none"
-        document.getElementById(`${p2id}`).disabled = true
-        document.createElement("div").classList(random2)
+        const timer = setInterval(() => {
+
+            timeleft--;
+            if (timeleft < 0) {
+              clearInterval(timer);
+              ResetTimer(timer);
+              console.log('Time is up!');
+              displayMessage('Time is up!');
+              
+              document.getElementById(`${p2id}`).style.display="block"
+            }
+            else{
+                document.getElementById("timer").innerHTML=`00:${timeleft}`}
+        },1000);    
+        
     }
 
 })
@@ -246,28 +311,26 @@ function disappear(crd) {
             document.addEventListener('click', function(evt) {
                 let element = evt.target;
                 let key = element.id
-                clearInterval(timer);
-                ResetTimer(timer);
                 if (text =="black"){
                     if (key == "choice2"){
                         document.getElementById("rig").style.display="block"
-                        resetAnswer() 
+                         
                     }
                     else if(key == "choice3" || key =="choice1") {
                         document.getElementById("wro").style.display="block"
                         document.getElementById(crd).style.display="block"
-                        resetAnswer()
+                       
                     }
                 }
                 else {
                     if (key == "choice1"){
                         document.getElementById("rig").style.display="block"
-                        resetAnswer()
+                        
                     }
                     else if(key == "choice3" || key =="choice2") {
                         document.getElementById("wro").style.display="block"
                         document.getElementById(crd).style.display="block"
-                        resetAnswer()
+                        
                     }
                 }
                 });
@@ -281,40 +344,12 @@ function disappear(crd) {
     
 }
                 
-   /* const deck = new Deck
-    deck.shuffle()
-    let keycolor=fivecard.appendChild(deck.cards[0].getHTML())
-    button3()           
-    const text = keycolor.getAttribute("data-value");  
-                  
-                document.addEventListener('click', function(evt) {
-                let element = evt.target;
-                let key = element.id
-                if (text =="black"){
-                    if (key == "choice2"){
-                        document.getElementById("rig").style.display="block" 
-                    }
-                    if(key == "choice3" || key =="choice1") {
-                        document.getElementById("wro").style.display="block"
-                    }
-                }
-                else {
-                    if (key == "choice1"){
-                        document.getElementById("rig").style.display="block"
-                    }
-                    if(key == "choice3" || key =="choice2") {
-                        document.getElementById("wro").style.display="block"
-                    }
-                }
-                }); 
-
-                
-                }*/
-            
             async function resetAnswer(){
                 setTimeout(() => {
                     // code to exclude after 2 seconds
-                  }, 2000);
+                    let x =4
+                    x--
+                  }, 1000);
 
                 document.getElementById("rig").style.display="none"
                 document.getElementById("wro").style.display="none"
