@@ -71,84 +71,46 @@ let myname
         
       })
 
-      const COLORtext = ["Red", "Blue", "Green", "Yellow", "Black", "Orange", "Purple", "Pink"] 
-            const VALUE = ["red", "blue", "green", "yellow", "white", "orange", "purple"]
+/*--------------------------------------------------------------------------------*/
 
-           class Deck {
-       constructor(cards = freshDeck()) {
-        this.cards = cards
-        }
+function inntex(){
+    const ta=["Red", "Blue", "Green", "Yellow", "Black", "Orange", "Purple", "Pink"];
+    const randomIndexx = Math.floor(Math.random() * 8);
+      const tex = ta[randomIndexx];
+      return tex;
+  }
 
-     get numberOfCards() {
-        return this.cards.length
-     }
-
-     shuffle() {
-        for (let i = this.numberOfCards - 1; i>0; i--) {
-            const newIndex = Math.floor(Math.random() * (i + 1))
-            const oldValue = this.cards[newIndex]
-            this.cards[newIndex] = this.cards[i]
-            this.cards[i] = oldValue
-        }
-    }
-    }
-
-  class Card {
-    constructor(colortext, value) {
-        this.colortext = colortext
-        this.value = value
-    }
-
-    get color() {
-        const colors = ["red", "blue", "black", "orange", "purple"]
-        const randomIndex = Math.floor(Math.random() * colors.length);
-        const textColor = colors[randomIndex];
-        button1(textColor)
-        return textColor;
-        
-      }
-    
-    backColor(col){
-        const colorss = [ "Green", "Yellow", "White","Pink"]
-        const randomIndexx = Math.floor(Math.random() * colorss.length);
-        const baColor = colorss[randomIndexx];
-        button2(baColor)
-        return baColor;
-    }
-    getHTML() {
-        const cardDiv = document.createElement("div")
-        cardDiv.innerText = this.colortext
-        let wow =this.color
-        cardDiv.classList.add("five", wow)
-        cardDiv.classList.add("five", this.backColor(this.value))
-        cardDiv.dataset.value = `${wow}`
-        return cardDiv
-    }
-
+  function backColor(){
+    const colorss = [ "Green", "Yellow", "White","Pink"]
+    const randomIndexx = Math.floor(Math.random() * 4);
+    const baColor = colorss[randomIndexx];
+    return baColor;
 }
 
-function freshDeck() {
-    return COLORtext.flatMap(colortext => {
-        return VALUE.map(value => {
-            return new Card(colortext, value)
-        })
-    })
-}
+function color() {
+    const colors = ["red", "blue", "black", "orange", "purple","black"]
+    const randomIndex = Math.floor(Math.random() * 5);
+    const textColor = colors[randomIndex];
+    return textColor;
+  }
 
 
-const fivecard= document.querySelector('.five')
 let timeleft = 4;
 let keys = ""
 let text =""
+let co =""
+let ba =""
+let te =""
 document.querySelectorAll(".card").forEach(e=>{
     e.addEventListener("click", function () {
         let value = this.className
-        const deck = new Deck
-        deck.shuffle()
-        let keycolor=fivecard.appendChild(deck.cards[0].getHTML())
-        button3()
-        text = keycolor.getAttribute("data-value");
-        socket.emit("playing", {value: value, id: e.id, name: myname})
+        let co =color();
+        let ba =backColor();
+        let te =inntex();
+        console.log(co)
+        console.log(ba)
+        console.log(te)
+        socket.emit("playing", {value: value, id: e.id, name: myname, co: co, ba: ba, te: te })
 
     })})
 
@@ -159,14 +121,15 @@ document.querySelectorAll(".card").forEach(e=>{
         socket.emit("choosing", { keys: keys} )})})
    
     socket.on("playing", (e) => {
-        
         const foundObject = (e.allPlayers).find(obj => obj.p1.p1name == `${myname}` || obj.p2.p2name == `${myname}`);
 
     p1id = foundObject.p1.p1move
     p2id = foundObject.p2.p2move
     turn1 = foundObject.p1.p1name
     turn2 = foundObject.p2.p2name
-
+    cal = foundObject.co
+    bac = foundObject.ba
+    tee = foundObject.te
     /*exchage turns*/
     if ((foundObject.sum) % 2 == 0) {
         document.getElementById("whosTurn").innerText = turn2 + "'s turn"
@@ -176,8 +139,16 @@ document.querySelectorAll(".card").forEach(e=>{
     }
 
     if (p1id != '') {
+        
         document.getElementById(`${p1id}`).style.display ="none"
         let sco1=5
+        
+        document.getElementById('five').style.color=cal
+        document.getElementById('five').style.backgroundColor=bac
+        document.getElementById('five').innerText=tee
+        button1(cal)
+        button2(bac)
+        button3()
         const timer = setInterval(() => {
             timeleft--;
             if (timeleft < 0) {
@@ -195,22 +166,22 @@ document.querySelectorAll(".card").forEach(e=>{
                     clearInterval(timer);
                     ResetTimer();
                     console.log(keys)
-                    if(text=="black"){
-                        if(keys=="choice2"){
+                    if(cal=="black"){
+                        if(document.getElementById(keys).innerText==bac){
                             document.getElementById(keys).style.backgroundColor="green" 
                             sco1--
                         }
-                        else if(keys=="choice1" || keys=="choice3"){
+                        else /*if(keys=="choice1" || keys=="choice3")*/{
                             document.getElementById(keys).style.backgroundColor="red"
                         }
 
                     }
-                    else{
-                        if(keys=="choice1"){
+                else{
+                        if(document.getElementById(keys).innerText==cal){
                             document.getElementById(keys).style.backgroundColor="green"
                             sco1-- 
                         }
-                        else if(keys=="choice2" || keys=="choice3"){
+                        else /*if(keys=="choice2" || keys=="choice3")*/{
                             document.getElementById(keys).style.backgroundColor="red"
                            
                         }
@@ -227,7 +198,15 @@ document.querySelectorAll(".card").forEach(e=>{
     }
 
     if (p2id != '') {
+    
         document.getElementById(`${p2id}`).style.display ="none"
+        
+        document.getElementById('five').style.color=cal
+        document.getElementById('five').style.backgroundColor=bac
+        document.getElementById('five').innerText=tee
+        button1(cal)
+        button2(bac)
+        button3()
         const timer = setInterval(() => {
             timeleft--;
             if (timeleft < 0) {
@@ -245,21 +224,21 @@ document.querySelectorAll(".card").forEach(e=>{
                     clearInterval(timer);
                     ResetTimer();
                     console.log(keys)
-                    if(text=="black"){
-                        if(keys=="choice2"){
+                    if(cal=="black"){
+                        if(document.getElementById(keys).innerText==bac){
                             document.getElementById(keys).style.backgroundColor="green" 
                         }
-                        else if(keys=="choice1" || keys=="choice3"){
+                        else {
                             document.getElementById(keys).style.backgroundColor="red"
                         }
                     }
                     
                  }
                  else{
-                    if(keys=="choice1"){
+                    if(document.getElementById(keys).innerText==cal){
                         document.getElementById(keys).style.backgroundColor="green" 
                     }
-                    else if(keys=="choice2" || keys=="choice3"){
+                    else{
                         document.getElementById(keys).style.backgroundColor="red"
                     }
                 }
@@ -300,7 +279,13 @@ document.querySelectorAll(".card").forEach(e=>{
                 // Display the message
                 const messageElement = document.getElementById('message');
                 messageElement.innerText = message;
-              }         
+              }  
+    function ResetGame() {
+        
+        document.getElementById("choice1").backgroundColor="gray"
+        document.getElementById("choice2").backgroundColor="gray"
+        document.getElementById("choice3").backgroundColor="gray"
+    }       
 
    
     

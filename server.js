@@ -40,23 +40,21 @@ io.on('connection', (socket) => {
                     p1name:arr[0],
                     p1value:"card one",
                     p1move:""
-                    /*p1card:"",
-                    */
                 }
                 let p2obj={
                     p2name:arr[1],
                     p2value:"card three",
                     p2move:""
-                    /*p2card:"",
-                    */
+                    
                 }
 
                 let obj={
                     p1:p1obj,
                     p2:p2obj,
                     sum:1,
-                    
-                   /* term:""*/
+                    co:"",
+                    ba:"",
+                    te:""
                 }
                 playingArray.push(obj)
 
@@ -77,9 +75,13 @@ io.on('connection', (socket) => {
             objToChange.p1.p1move=e.id
             objToChange.p2.p2move=''
             objToChange.sum++
-            /*objToChange.p1.p1card=e.classes
+            objToChange.co=e.co
+            objToChange.ba=e.ba
+            objToChange.te=e.te
+            console.log(e.te)
+            console.log(e.ba)
+            console.log(e.co)
             
-            objToChange.term=e.term*/
         }
         else if (e.value=="card three"){
             let objToChange=playingArray.find(obj=>obj.p2.p2name==e.name)
@@ -87,11 +89,10 @@ io.on('connection', (socket) => {
             objToChange.p2.p2move=e.id
             objToChange.p1.p1move=''
             objToChange.sum++
-           /* objToChange.p1.p2card=e.classes
-            
-            objToChange.p2.key2=e.key
-            objToChange.term=e.term
-        */        }
+            objToChange.co=e.co
+            objToChange.ba=e.ba
+            objToChange.te=e.te
+            }
         
         
         console.log(playingArray)
