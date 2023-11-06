@@ -1,3 +1,5 @@
+
+
 const socket = io();
 let myname
       
@@ -188,9 +190,10 @@ document.querySelectorAll(".card").forEach(e=>{
             let element = evt.target;
             let key = element.id
             console.log(key)
+            console.log(text)
             /*clearInterval(timer);
             ResetTimer(timer);*/
-            socket.emit('choices', {key: key})
+            socket.emit('choices', {key: key, text:text})
         })
             
         
@@ -219,23 +222,25 @@ socket.on("playing", (e) => {
         document.getElementById(`${p1id}`).style.display ="none"
         const timer = setInterval(() => {
             timeleft--;
+            console.log(timeleft)
               if (timeleft < 0) {
               clearInterval(timer);
               ResetTimer(timer);
               console.log('Time is up!');
               displayMessage('Time is up!');
-              
               document.getElementById(`${p1id}`).style.display="block"
             }
             else{
-                document.getElementById("timer").innerHTML=`00:${timeleft}`}
+                document.getElementById("timer").innerHTML=`00:${timeleft}`
                 socket.on("choices", (e)=>{
                     keys = e.key
-                    let text = "black"
+
+                   let texts =e.kl
+                    console.log(texts)
                     clearInterval(timer);
                     ResetTimer(timer);
                     console.log(keys)
-                    if (text =="black"){
+                    if (texts =="black"){
                         if (keys == "choice2"){
                             document.getElementById("rig").style.display="block"
                             
@@ -257,7 +262,7 @@ socket.on("playing", (e) => {
                             
                         }
                     }
-                })
+                })}
             
         },1000);    
         

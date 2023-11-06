@@ -1,49 +1,89 @@
 
 const socket = io();
-            
-const form = document.getElementById('chatt');
-const input = document.getElementById('input-mas');
-const messages = document.getElementById('messages');
+let myname
+ // function to switch language of web page
+ let language_content =
+ {
+    "en": {
+     "1": "How to play",
+     "2": "How to play",
+     "3": "If the color of the text is black then the answer is the background color",
+     "4": "If the color of the text is not black then the answer is the text color",
+     "5": "Play",
+     "6": "Enter your name",
+     "7": "Start"
+ 
+    },
+    "ar": {
+     "1": "طريقة اللعب",
+     "2": "طريقة اللعب",
+     "3": " اذا كان لون النص اسود فان الاجابة الصحيحة هي لون الخلفية",
+     "4": "اذا لم يكن لون النص اسود فان الاجابة هي لون النص",
+     "5": "العب",
+     "6": "ادخل اسمك",
+     "7": "ابدا"
+    }
+ }
+ 
+ function changeLanguage(lang) {
+    for (let key in language_content[lang]) {
+       document.getElementById(key).innerHTML = language_content[lang][key];
+    }
+  }
+  /*----paasing player name to back end-------*/
+  document.getElementById("page2").style.display='none'
+  document.getElementById("loading").style.display='none'
 
-           
-            /*send message to server*/
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (input.value) {
-                socket.emit('chat message', input.value);
-                input.value = '';
-                }
-            });
-            socket.on('chat message', (msg) => {
-                const item = document.createElement('li');
-                item.textContent = msg;
-                messages.appendChild(item);
-                window.scrollTo(0, document.body.scrollHeight);
-            });
+  document.getElementById("7").addEventListener("click", function() {
+       
+    myname = document.getElementById("name").value
+    document.getElementById("user").innerText=myname
+      
+     if(myname==null || myname==''){
+       alert("enter your name, please")
+     }
 
-            /*------------------findname----------------*/
-            
-            socket.on("game", (e) =>{
-            document.getElementById("usercont").style.display="none"
-            
-            })
+     else{
+       socket.emit('find', { name: myname })
+       document.getElementById("loading").style.display="block"
+       document.getElementById("7").disabled=true 
+     }
 
-            document.getElementById("rig").style.display="none"
-            document.getElementById("wro").style.display="none" 
+    })
 
-            const COLORtext = ["Red", "Blue", "Green", "Yellow", "Black", "Orange", "Purple", "Pink"] 
+    socket.on("find", (e) => {
+
+
+        let allPlayersArray = e.allPlayers
+        
+        document.getElementById("page1").style.display="none"
+        document.getElementById("page2").style.display="block"
+        document.getElementById("rig").style.display="none"
+        document.getElementById("wro").style.display="none"
+        
+        let oppName
+        let value
+        const foundObject = allPlayersArray.find(obj => obj.p1.p1name == `${myname}` || obj.p2.p2name == `${myname}`);
+        foundObject.p1.p1name == `${myname}` ? oppName = foundObject.p2.p2name : oppName = foundObject.p1.p1name
+        foundObject.p1.p1name == `${myname}` ? value = foundObject.p1.p1value : value = foundObject.p2.p2value
+        document.getElementById("opp").innerText = oppName
+        document.getElementById("whosTurn").innerText = foundObject.p1.p1name
+        
+      })
+
+      const COLORtext = ["Red", "Blue", "Green", "Yellow", "Black", "Orange", "Purple", "Pink"] 
             const VALUE = ["red", "blue", "green", "yellow", "white", "orange", "purple"]
 
            class Deck {
        constructor(cards = freshDeck()) {
         this.cards = cards
-    }
+        }
 
-    get numberOfCards() {
+     get numberOfCards() {
         return this.cards.length
-    }
+     }
 
-    shuffle() {
+     shuffle() {
         for (let i = this.numberOfCards - 1; i>0; i--) {
             const newIndex = Math.floor(Math.random() * (i + 1))
             const oldValue = this.cards[newIndex]
@@ -51,9 +91,9 @@ const messages = document.getElementById('messages');
             this.cards[i] = oldValue
         }
     }
-}
+    }
 
-class Card {
+  class Card {
     constructor(colortext, value) {
         this.colortext = colortext
         this.value = value
@@ -97,144 +137,170 @@ function freshDeck() {
 
 
 const fivecard= document.querySelector('.five')
-let timeleft = 4; 
+let timeleft = 4;
+let keys = ""
+let text =""
+document.querySelectorAll(".card").forEach(e=>{
+    e.addEventListener("click", function () {
+        let value = this.className
+        const deck = new Deck
+        deck.shuffle()
+        let keycolor=fivecard.appendChild(deck.cards[0].getHTML())
+        button3()
+        text = keycolor.getAttribute("data-value");
+        socket.emit("playing", {value: value, id: e.id, name: myname})
 
-function disappear(crd) {
-    /*document.getElementById(crd).style.display="none"*/
-    socket.emit('card-clicked', crd);
-    socket.on('card-disappeared', (cardId) => {
-        const card = document.getElementById(cardId);
-        card.style.display = 'none';
-      
-    /*setInterval(count, 1000)*/
-    const deck = new Deck
-    deck.shuffle()
-    let keycolor=fivecard.appendChild(deck.cards[0].getHTML())
-    button3()
-    const text = keycolor.getAttribute("data-value");
-    const timer = setInterval(() => {
+    })})
 
-        timeleft--;
-        if (timeleft < 0) {
-          clearInterval(timer);
-          ResetTimer(timer);
-          console.log('Time is up!');
-          displayMessage('Time is up!');
-          resetAnswer()
-          document.getElementById(crd).style.display="block"
-        }
-
-        else{
-            document.getElementById("timer").innerHTML=`00:${timeleft}`
-            document.addEventListener('click', function(evt) {
-                let element = evt.target;
-                let key = element.id
-                clearInterval(timer);
-                ResetTimer(timer);
-                if (text =="black"){
-                    if (key == "choice2"){
-                        document.getElementById("rig").style.display="block"
-                        resetAnswer() 
-                    }
-                    if(key == "choice3" || key =="choice1") {
-                        document.getElementById("wro").style.display="block"
-                        document.getElementById(crd).style.display="block"
-                        resetAnswer()
-                    }
-                }
-                else {
-                    if (key == "choice1"){
-                        document.getElementById("rig").style.display="block"
-                        resetAnswer()
-                    }
-                    if(key == "choice3" || key =="choice2") {
-                        document.getElementById("wro").style.display="block"
-                        document.getElementById(crd).style.display="block"
-                        resetAnswer()
-                    }
-                }
-                });
-        }
+        document.querySelectorAll(".choice").forEach(e=>{
+        e.addEventListener('click', function() {
+            keys = this.id
+            console.log(keys)
+        socket.emit("choosing", { keys: keys} )})})
+   
+    socket.on("playing", (e) => {
         
-        }, 1000);
-    })
-}
-                
-   /* const deck = new Deck
-    deck.shuffle()
-    let keycolor=fivecard.appendChild(deck.cards[0].getHTML())
-    button3()           
-    const text = keycolor.getAttribute("data-value");  
-                  
-                document.addEventListener('click', function(evt) {
-                let element = evt.target;
-                let key = element.id
-                if (text =="black"){
-                    if (key == "choice2"){
-                        document.getElementById("rig").style.display="block" 
-                    }
-                    if(key == "choice3" || key =="choice1") {
-                        document.getElementById("wro").style.display="block"
-                    }
-                }
-                else {
-                    if (key == "choice1"){
-                        document.getElementById("rig").style.display="block"
-                    }
-                    if(key == "choice3" || key =="choice2") {
-                        document.getElementById("wro").style.display="block"
-                    }
-                }
-                }); 
+        const foundObject = (e.allPlayers).find(obj => obj.p1.p1name == `${myname}` || obj.p2.p2name == `${myname}`);
 
-                
-                }*/
-            
-            async function resetAnswer(){
-                setTimeout(() => {
-                    // code to exclude after 2 seconds
-                  }, 2000);
+    p1id = foundObject.p1.p1move
+    p2id = foundObject.p2.p2move
+    turn1 = foundObject.p1.p1name
+    turn2 = foundObject.p2.p2name
 
-                document.getElementById("rig").style.display="none"
-                document.getElementById("wro").style.display="none"
-                document.getElementById('message').style.display="none"   
+    /*exchage turns*/
+    if ((foundObject.sum) % 2 == 0) {
+        document.getElementById("whosTurn").innerText = turn2 + "'s turn"
+    }
+    else {
+        document.getElementById("whosTurn").innerText = turn1 + "'s turn"
+    }
+
+    if (p1id != '') {
+        document.getElementById(`${p1id}`).style.display ="none"
+        let sco1=5
+        const timer = setInterval(() => {
+            timeleft--;
+            if (timeleft < 0) {
+              clearInterval(timer);
+              ResetTimer();
+              console.log(timeleft)
+              console.log('Time is up!');
+              displayMessage('Time is up!');
+              
+              document.getElementById(`${p1id}`).style.display="block" 
             }
-           function ResetTimer(){
-            timeleft = 4;
-           }
-                function displayMessage(message) {
-                    // Display the message
-                    const messageElement = document.getElementById('message');
-                    messageElement.innerText = message;
-                  }         
-            
+            else{
+                document.getElementById("timer").innerHTML=`00:${timeleft}`
+                 if(keys!=""){
+                    clearInterval(timer);
+                    ResetTimer();
+                    console.log(keys)
+                    if(text=="black"){
+                        if(keys=="choice2"){
+                            document.getElementById(keys).style.backgroundColor="green" 
+                            sco1--
+                        }
+                        else if(keys=="choice1" || keys=="choice3"){
+                            document.getElementById(keys).style.backgroundColor="red"
+                        }
+
+                    }
+                    else{
+                        if(keys=="choice1"){
+                            document.getElementById(keys).style.backgroundColor="green"
+                            sco1-- 
+                        }
+                        else if(keys=="choice2" || keys=="choice3"){
+                            document.getElementById(keys).style.backgroundColor="red"
+                           
+                        }
+                    }
+                    
+                    
+                 }
+
+            }
+            console.log(sco1)
+            keys=""
+        },1000)
+      
+    }
+
+    if (p2id != '') {
+        document.getElementById(`${p2id}`).style.display ="none"
+        const timer = setInterval(() => {
+            timeleft--;
+            if (timeleft < 0) {
+              clearInterval(timer);
+              ResetTimer();
+              console.log(timeleft)
+              console.log('Time is up!');
+              displayMessage('Time is up!');
+              document.getElementById(`${p2id}`).style.display="block"
+              
+            }
+            else{
+                document.getElementById("timer").innerHTML=`00:${timeleft}`
+                if(keys!=""){
+                    clearInterval(timer);
+                    ResetTimer();
+                    console.log(keys)
+                    if(text=="black"){
+                        if(keys=="choice2"){
+                            document.getElementById(keys).style.backgroundColor="green" 
+                        }
+                        else if(keys=="choice1" || keys=="choice3"){
+                            document.getElementById(keys).style.backgroundColor="red"
+                        }
+                    }
+                    
+                 }
+                 else{
+                    if(keys=="choice1"){
+                        document.getElementById(keys).style.backgroundColor="green" 
+                    }
+                    else if(keys=="choice2" || keys=="choice3"){
+                        document.getElementById(keys).style.backgroundColor="red"
+                    }
+                }
+            }
+            keys=""
+        },1000)
         
-function button1(bu1) {
-    let b = bu1
-    document.getElementById("choice1").innerText=b
-} 
-           
-function button2(bu2){
-    let b = bu2
-    document.getElementById("choice2").innerText=b
-}  
+    }
+    })
 
-function button3(){
-    const choices = [ "Black", "Brown", "Gray"]
-        const randomIndexx = Math.floor(Math.random() * choices.length);
-        const othchi = choices[randomIndexx];
-        document.getElementById("choice3").innerText=othchi 
-}
+    socket.on("choosing", (e)=>{
+        keys= e.key
+        console.log(keys)
+    })
 
-function changeButtonPosition() {
-      const buttons1 = document.getElementById("choice1");
-      const buttons2 = document.getElementById("choice2");
-      const buttons3 = document.getElementById("choice3");
-
-      const temp = buttons1.style.left;
-      buttons1.style.left = buttons2.style.left;
-      buttons2.style.left = buttons3.style.left;
-      buttons3.style.left = temp;
+    function button1(bu1) {
+        let b = bu1
+        document.getElementById("choice1").innerText=b
+    } 
+               
+    function button2(bu2){
+        let b = bu2
+        document.getElementById("choice2").innerText=b
     }  
     
+    function button3(){
+        const choices = [ "Black", "Brown", "Gray"]
+            const randomIndexx = Math.floor(Math.random() * choices.length);
+            const othchi = choices[randomIndexx];
+            document.getElementById("choice3").innerText=othchi 
+    }
+    
+    function ResetTimer(){
+        timeleft = 4;
+        return timeleft
+       }
+            function displayMessage(message) {
+                // Display the message
+                const messageElement = document.getElementById('message');
+                messageElement.innerText = message;
+              }         
+
+   
     

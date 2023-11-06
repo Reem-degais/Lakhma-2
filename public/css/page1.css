@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 body 
 {
   background-color: #660000;
@@ -13,11 +14,11 @@ body
 {
   padding: 1px;
   margin-top: 10px;
-  margin-left: 0;
-  margin-right: 0;
+  float: left;
   width: 100px;
   height: 50px;
-  position: absolute;
+  display: flex;
+  padding-top: 2%;
 }
 .ar
 {
@@ -27,14 +28,14 @@ body
 /*----------------how to play button-----------------*/
 .howtoplay 
 {
-  position: absolute;
+  display: flex;
   padding: 13px;
-  margin-left: 100px;
-  margin-right: 0;
-  height: 50px;
-  width: 200px;
-  left: 1270px;
   margin-top: 10px;
+  height:auto;
+  width: 200px;
+  
+  
+  float: right;
 }
 
 /* ----------------The Modal ------------------------- */
@@ -43,7 +44,7 @@ body
 .modal 
 {
   display: none; 
-  position: fixed; 
+   
   z-index: 1; 
   left: 0;
   top: 0;
@@ -90,35 +91,36 @@ body
 /*----------------------main_container--------------------------------*/
 .maincontainer 
 {
-  position: absolute;
-  width: 40%;
+  display: flex;
+  margin: auto;
+  width: 50%;
+  height: 550px;
   padding: 10px;
-  margin-left: 400px;
-  margin-top: 130px;
-  
+  background-color: #DDDDDD;
 }
 
 .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
+    display: flex;
+    width: 50%;
+    margin: auto;
     position: relative;
   }
 
   /*game_name*/
 .gamename 
-{    
-  padding: 10px; 
-  width: 40%;
-  margin-left: 140px;
+{
+  display: flex;
+  margin-top: 70%; 
 }
 
 /*start button*/
 .play
   {
-    position: absolute;
-    padding: 17px;
-    left: 250px;
-    width: 150px;
+    
+    display: flex;  
+    padding: 10px; 
+    width: 50%;
+    margin: auto;
   }
 
 /* input fields */

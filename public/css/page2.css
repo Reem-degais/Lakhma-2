@@ -1,269 +1,262 @@
-body {
-    background-color: #E06666;
-    margin: 1px;
-}
-
-/* chat container*/
-
-.chatcontainer{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  body 
+  {
+    background-color: #660000;
     
-    background-color: cornsilk;
-    width: auto;
-    height: auto;
-    float: right;
-    margin-top: 320px;
-    border: #7a3b3b solid;
-}
+  }
 
-.chatt{
-    position: fixed;
-}
-.chattext{
-
-   width: 75%;
-   height: 10%; 
-   margin-top: 250px;
-   margin-left: 10px;
-}
-
-.send{
-    height: 10%;
-    width: 15%;
+#languageSwitcher{
+    width: 100%;
+    height: 70px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
     
 }
 
-/*play board*/
-
-.playbord{
-    position: relative;
-    background-color: #f1c232 ;
-    width: auto;
-    height: auto;
-    margin-top: 10px;
-    margin-left: 10px;
-    border: brown solid;
+.language
+{
+  
+  float: left;
+  width: 10%;
+  height: 50px;
+  padding-left: 3%; 
+  padding-right: 3%;
+  
 }
 
-.card{
 
-    background-color: #990000;
-    border: black solid 1px;
-}
-
-/*--------------------player1 cards-------------------*/
-.one{
-    position: absolute;
-    float: right;
-    width: 60px;
-    height: 80px; 
-      
+.howtoplay 
+{ 
+  height: 50px;
+  width: 30%;
+  padding-left: 3%; 
+  padding-right: 3%;
+  float: right;
 }
 
-#o1{
-    left: 550px;
+.modal 
+{
+  display: none; 
+   
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  padding-top: 60px;
 }
-#o2{
-    left: 500px;
+
+.modal-content 
+{
+  background-color: #DDDDDD;
+  margin: 5% auto 15% auto; 
+  border: 1px solid #888;
+  width: 30%; 
 }
-#o3{
-    left:450px;
+
+.model-shape
+{
+  background-color: #DDDDDD;
+  margin: 5% auto 15% auto; 
+  border: 1px solid #888;
+  width: 30%; 
 }
-#o4{
-    left: 400px;
+
+/* The Close Button (x) */
+.close {
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  .close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
 }
-#o5{
-    left:350px;
+
+/*---------------------- Add Zoom Animation----------------------*/
+.animate 
+{
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
 }
-.pic1{
+  
+@-webkit-keyframes animatezoom 
+{
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom 
+{
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+.maincontainer 
+{
+ 
+margin: auto;
+width: 60%;
+min-height: 590px;
+padding-top: 3%;
+}
+
+.gamename 
+{
+display: flex;
+margin: auto; 
+}
+.play
+  {
+    display: flex;  
+    margin: auto;
+  }
+
+.imge{
+    display: flex;  
+    margin: auto; 
+    
+}  
+
+button 
+{
+  background-color: #b6b3b3;
+  color: rgb(0, 0, 0);
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 30px;
+}
+
+button:hover 
+{
+  opacity: 0.8;
+}
+
+#loading{
+    display: flex;
+    width: 40px;
+    margin:auto 
+  }
+
+  .pic1{
 
     width: 40px; 
     height: 40px; 
     transform: scaleY(-1);
     margin-left: 10px;
     margin-top: 20px;
-}
+  }
 
-/*------------------player2 cards--------------------*/
-.two{
-    position: absolute;
-    left: 839px;
-    width: 80px;
-    height: 60px;
-    
-}
-#t1{
-    top:370px;
-}
-#t2{
-    top:320px;
-}
-#t3{
-    top:270px;
-}
-#t4{
-    top:220px;
-}
-#t5{
-    top:170px;
-}
-.pic2{
-    width: 40px; 
-    height: 40px;
-    transform: rotate(-90deg);
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-/*----------------------player3 cards----------------*/
-.three{
-    position: absolute;
-    top: 537px;
-    width: 60px;
-    height: 80px;  
-}
-#th1{
-    left: 550px;
-}
-#th2{
-    left: 500px;
-}
-#th3{
-    left:450px;
-}
-#th4{
-    left: 400px;
-}
-#th5{
-    left:350px;
-}
-.pic3{
+  .pic3{
     width: 40px; 
     height: 40px;
     margin-top: 20px;
     margin-left: 10px;  
-}
+  }
+  
 
-/*----------------------player4 cards----------------------*/
-.four{
-    position: absolute;
-    width: 80px;
-    height: 60px;
-}
-
-#f1{
-    top:370px;
-}
-#f2{
-    top:320px;
-}
-#f3{
-    top:270px;
-}
-#f4{
-    top:220px;
-}
-#f5{
-    top:170px;
-}
-.pic4{
-    width: 40px; 
-    height: 40px;
-    transform: rotate(90deg);
-    margin-left: 20px;
-    margin-top: 10px;
-      
-}
-
-/*-----------------------main card --------------------------*/
-.five{
-    position: fixed;
-    top: 250px;
-    left: 400px;
-    width: 90px;
-    height: 110px;
-    text-align: center;
-    font-size: larger;
+  .chatcontainer{
+    width: 30%;
     background-color: aliceblue;
-    border: black solid 1px;
-    
-}
-/*---------------card color---------------------------------*/
-.five.red{
-    color: #990000;
-    
-}
-.five.black{
-    color: black;
-}
-.five.green{
-    color: green;
-}
-.five.blue{
-    color: blue;
-}
-.five.pink{
-    color: pink;
-}
-.five.purple{
-    color: purple;
-}
-.five.orange{
-    color: orangered
-}
-.five.yellow{
-    color: yellow;
-}
-/*----------------background color--------------------------------------*/
-.five.Red{
+    float: right;
+    height: 600px;
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+    top:20px;
+  }
+
+  .playbord{
+    width: 60%;
+    height: 600px;
+    background-color: #f1c232;
+    float: left;
+    position: relative;
+    left: 20px;
+    bottom: 20px;
+    top:20px;
+  }
+  .card{
+
     background-color: #990000;
-}
-.five.White{
-    background-color: white;
-}
-.five.Green{
-    background-color: green;
-}
-.five.Blue{
-    background-color: blue;
-}
-.five.Pink{
-    background-color: pink;
-}
-.five.Purple{
-    background-color: purple;
-}
-.five.Orange{
-    background-color: orangered
-}
-.five.Yellow{
-    background-color: yellow;
-}
+    border: black solid 1px;
+    width: 20%;
+    height: 80px;
+    
+  }
 
-.choice{
-    position: absolute;
-    width: 60px;
-    background-color: #dfd9d9;
-    height: 30px;
-}
-#choice1{
-    top:450px;
-    left: 300px;
-}
+  .oneone{
+    
+    background-color: #DDDDDD; 
+    width: 40%;
+    height: 80px;
+    margin-left: 30%;
+  }
+  .one{
+    position: relative;
+    float: inline-start;
+     
+    }
 
-#choice2{
-    top:450px;
-    left: 390px;
-}
+    .threethree{
+        position: relative;
+        background-color: #DDDDDD; 
+    width: 40%;
+    height: 80px;
+    margin-left: 30%;
+     top:440px} 
+    .three{
+        position:relative;
+        float: inline-start;   
+        
+      }
+    .cho{
+         
+        width: 35%;
+        height: 30px;
+        margin-left: 33%;  
+        position: relative;
+        top:100px
+    }
+    .choice{
+        position: relative;
+        width: 20%;
+        float: inline-start;
+        height: 30px;
+      }
 
-#choice3{
-    top:450px;
-    left: 480px;
-}
-
-#timer{
-    background-color: white;
-    width: 60px;
-    text-align: center;
-    font-size: 30px;
-
-}
+      .information{
+        background-color: #003066;
+      }
+      .mess{
+        background-color: #003066;
+        position: relative;
+        top: 250px;
+        height: 50%;
+      }
+      #chat{
+    
+        background-color: #b6b3b3; 
+        width: 60%;
+        }
+    
+            .send{
+                
+                width: 15%;
+                
+              }
+              
+       

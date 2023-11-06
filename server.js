@@ -17,12 +17,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/page1.js', function (req, res) {
-	res.sendFile(join(__dirname ,'/public/scripts/page1.js'));
+	res.sendFile(join(__dirname ,'/public/scripts/page2.js'));
 });
 
 let arr=[]
 let playingArray=[]
-
+let key =""
 
 io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
@@ -39,23 +39,24 @@ io.on('connection', (socket) => {
                 let p1obj={
                     p1name:arr[0],
                     p1value:"card one",
-                    p1move:"",
-                    p1card:"",
-                    key1:""
+                    p1move:""
+                    /*p1card:"",
+                    */
                 }
                 let p2obj={
                     p2name:arr[1],
                     p2value:"card three",
-                    p2move:"",
-                    p2card:"",
-                    key2:""
+                    p2move:""
+                    /*p2card:"",
+                    */
                 }
 
                 let obj={
                     p1:p1obj,
                     p2:p2obj,
                     sum:1,
-                    term:""
+                    
+                   /* term:""*/
                 }
                 playingArray.push(obj)
 
@@ -69,32 +70,41 @@ io.on('connection', (socket) => {
     })
 
     socket.on("playing",(e)=>{
+        
         if(e.value=="card one"){
             let objToChange=playingArray.find(obj=>obj.p1.p1name==e.name)
 
             objToChange.p1.p1move=e.id
-            objToChange.p1.p1card=e.classes
+            objToChange.p2.p2move=''
             objToChange.sum++
-            objToChange.p1.key1=e.key
-            objToChange.term=e.term
+            /*objToChange.p1.p1card=e.classes
+            
+            objToChange.term=e.term*/
         }
-        else if(e.value=="card three"){
+        else if (e.value=="card three"){
             let objToChange=playingArray.find(obj=>obj.p2.p2name==e.name)
-
+            
             objToChange.p2.p2move=e.id
-            objToChange.p1.p2card=e.classes
+            objToChange.p1.p1move=''
             objToChange.sum++
+           /* objToChange.p1.p2card=e.classes
+            
             objToChange.p2.key2=e.key
             objToChange.term=e.term
-        }
-
+        */        }
+        
+        
+        console.log(playingArray)
         io.emit("playing",{allPlayers:playingArray})
 
     })
 
-    socket.on("choices",(key)=>{
-      io.emit("choices", key)
-    })
+    socket.on("choosing",(e)=>{
+            
+        let keys=e.keys
+          io.emit("choosing", {key: keys})
+          console.log(keys)
+      })
 })
 server.listen(8080, () => {
     console.log('server running at http://localhost:8080');
