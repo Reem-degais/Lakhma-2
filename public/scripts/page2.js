@@ -101,6 +101,8 @@ let text =""
 let co =""
 let ba =""
 let te =""
+let sco1=5
+let scol2=5
 document.querySelectorAll(".card").forEach(e=>{
     e.addEventListener("click", function () {
         let value = this.className
@@ -141,7 +143,7 @@ document.querySelectorAll(".card").forEach(e=>{
     if (p1id != '') {
         
         document.getElementById(`${p1id}`).style.display ="none"
-        let sco1=5
+        
         
         document.getElementById('five').style.color=cal
         document.getElementById('five').style.backgroundColor=bac
@@ -149,6 +151,7 @@ document.querySelectorAll(".card").forEach(e=>{
         button1(cal)
         button2(bac)
         button3()
+        changeButtonPosition()
         const timer = setInterval(() => {
             timeleft--;
             if (timeleft < 0) {
@@ -193,12 +196,13 @@ document.querySelectorAll(".card").forEach(e=>{
             }
             console.log(sco1)
             keys=""
+            winner(sco1, scol2) 
         },1000)
       
     }
 
     if (p2id != '') {
-    
+       let scol2 =5
         document.getElementById(`${p2id}`).style.display ="none"
         
         document.getElementById('five').style.color=cal
@@ -207,6 +211,7 @@ document.querySelectorAll(".card").forEach(e=>{
         button1(cal)
         button2(bac)
         button3()
+        changeButtonPosition()
         const timer = setInterval(() => {
             timeleft--;
             if (timeleft < 0) {
@@ -227,6 +232,7 @@ document.querySelectorAll(".card").forEach(e=>{
                     if(cal=="black"){
                         if(document.getElementById(keys).innerText==bac){
                             document.getElementById(keys).style.backgroundColor="green" 
+                            scol2--;
                         }
                         else {
                             document.getElementById(keys).style.backgroundColor="red"
@@ -237,6 +243,7 @@ document.querySelectorAll(".card").forEach(e=>{
                  else{
                     if(document.getElementById(keys).innerText==cal){
                         document.getElementById(keys).style.backgroundColor="green" 
+                        scol2--
                     }
                     else{
                         document.getElementById(keys).style.backgroundColor="red"
@@ -244,6 +251,7 @@ document.querySelectorAll(".card").forEach(e=>{
                 }
             }
             keys=""
+          winner(sco1, scol2)  
         },1000)
         
     }
@@ -287,5 +295,20 @@ document.querySelectorAll(".card").forEach(e=>{
         document.getElementById("choice3").backgroundColor="gray"
     }       
 
-   
-    
+    function changeButtonPosition() {
+        const buttons1 = document.getElementById("choice1");
+        const buttons2 = document.getElementById("choice2");
+        const buttons3 = document.getElementById("choice3");
+  
+        const temp = buttons1.style.left;
+        buttons1.style.left = buttons2.style.left;
+        buttons2.style.left = buttons3.style.left;
+        buttons3.style.left = temp;
+      }  
+     function winner(pl1,pl2) {
+        if(pl1==0)
+        alert ("player 1 the winer")
+        if (pl2==0){
+            alert("player  the winer")
+        }
+     }
