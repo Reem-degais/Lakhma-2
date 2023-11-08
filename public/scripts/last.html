@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Lakhma</title>
-    <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
-    <link rel="stylesheet" href="public/css/page2.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/page1.css">
   </head>
   
   <body>
@@ -44,10 +44,11 @@
     <div class="maincontainer">
         
       <!--logo_image-->
-      <img src="images\logo.png" alt="logo" width="500" height="300" class="imge">
+      <img src="images\logo.png" alt="logo" width="500" height="300" >
+      <p> </p>
         
       <!--game_name-->
-      <img  class="gamename" src="images/la.jpeg" alt="la" width="300" height="90" >
+      <div class="gamename"><img src="images/la.jpeg" alt="la" ></div>
         
       <!--start_button-->
       <button id="5" class="play" onclick="document.getElementById('logform').style.display='block'" style="width:auto;">Play</button>
@@ -76,27 +77,21 @@
     </div>
     <div id="page2">
       <div class="chatcontainer"  >
-        
-          <span id="user">you</span>
-      <p id="oppcont">VS </p>
-      <span id="opp">op</span>
-      <p id="timer">00:4</p>
-      <p id="whosTurn"></p>
-    
-        <div class="mess">
         <ul id="messages"></ul>
         <form id="chatt" action="">
             <input type="text" class="chattext" id="input-mas">
             <button class="send">send</button>
         </form>
-      </div>
-  </div>
-    
+    </div>
+    <p id="usercont">you:<span id="user"></span></p>
+    <p id="oppcont">oopy: <span id="opp"></span></p>
+    <p id="timer">00:4</p>
+    <p id="whosTurn"></p>
     <!------------------game board------------------------------>
     <div class="playbord">
         <p id="message"></p>
         <!------player1 cards------------>
-          <div class="oneone">
+        
             <div class="card one" id="o1" >
                 <img src="images/logo.png" class="pic1">
             </div>
@@ -112,42 +107,76 @@
             <div class="card one" id="o5">
                 <img src="images/logo.png" class="pic1">
             </div>
-          </div>
+    
+        
+            <!----------------player2 cards--------------------->
+            <div class="card two" id="t1" onclick="disappear('t1')">
+                <img src="images/logo.png" class="pic2">
+            </div>
+            <div class="card two" id="t2" onclick="disappear('t2')">
+                <img src="images/logo.png" class="pic2">
+            </div>
+            <div class="card two" id="t3" onclick="disappear('t3')">
+                <img src="images/logo.png" class="pic2">
+            </div>
+            <div class="card two" id="t4" onclick="disappear('t4')">
+                <img src="images/logo.png" class="pic2">
+            </div>
+            <div class="card two" id="t5" onclick="disappear('t5')">
+                <img src="images/logo.png" class="pic2">
+            </div>
+        
 
             <!---------------player3 cards------------------->
-           <div class="threethree">
-            <div class="card three" id="th1" >
+            <div class="card three" id="th1" onclick="disappear('th1')">
                 <img src="images/logo.png" class="pic3"> 
             </div>
-            <div class="card three" id="th2" >
+            <div class="card three" id="th2" onclick="disappear('th2')">
                 <img src="images/logo.png" class="pic3">
             </div>
-            <div class="card three" id="th3" >
+            <div class="card three" id="th3" onclick="disappear('th3')">
                 <img src="images/logo.png" class="pic3">
             </div>
-            <div class="card three" id="th4" >
+            <div class="card three" id="th4" onclick="disappear('th4')">
                 <img src="images/logo.png" class="pic3">
             </div>
-            <div class="card three" id="th5" >
+            <div class="card three" id="th5" onclick="disappear('th5')">
                 <img src="images/logo.png" class="pic3">
             </div>
-          </div>
+        
 
-            
+            <!-----------player4 cards----------------------->
+            <div class="card four" id="f1" onclick="disappear('f1')">
+                <img src="images/logo.png" class="pic4">
+            </div>
+            <div class="card four" id="f2" onclick="disappear('f2')">
+                <img src="images/logo.png" class="pic4">
+            </div>
+            <div class="card four" id="f3" onclick="disappear('f3')">
+                <img src="images/logo.png" class="pic4">
+            </div>
+            <div class="card four" id="f4" onclick="disappear('f4')">
+                <img src="images/logo.png" class="pic4">
+            </div>
+            <div class="card four " id="f5" onclick="disappear('f5')">
+                <img src="images/logo.png" class="pic4">
+            </div>
         
         
         <!-----------------main card--------------->
-        <div class="five" id="five"></div>    
-      <!--------choice buttons---------->
-        <div class="cho">
-        <button class="choice" id="choice1" ></button>
-        <button class="choice" id="choice2" ></button>
-        <button class="choice" id="choice3" ></button>
-      </div>
+        <div class="five" id="the"></div>
+        <img src="images/right.png" id="rig" style="width: 200px; height: 200px;">
+        <img src="images/wrong.png" id="wro" style="width: 200px; height: 200px;">
+        
+        <!--------choice buttons----------->
+        <button class="choice" id="choice1" style="background-color: brown;" onclick="rightans('choice1')">1</button>
+        <button class="choice" id="choice2" onclick="rightans('choice1')">2</button>
+        <button class="choice" id="choice3" style="background-color: aqua;" onclick="rightans('choice1')">3</button>
+        
     </div>
     </div>
      <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="scripts/page2.js"></script>
+    <script type="text/javascript" src="scripts/page1.js"></script>
     
   </body>
 </html>

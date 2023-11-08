@@ -1,6 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body 
 {
   background-color: #660000;
+  
 }
 
 /*------------------------language buttons..........................................*/
@@ -8,11 +14,11 @@ body
 {
   padding: 1px;
   margin-top: 10px;
-  margin-left: 0;
-  margin-right: 0;
+  float: left;
   width: 100px;
   height: 50px;
-  position: absolute;
+  display: flex;
+  padding-top: 2%;
 }
 .ar
 {
@@ -22,14 +28,14 @@ body
 /*----------------how to play button-----------------*/
 .howtoplay 
 {
-  position: absolute;
+  display: flex;
   padding: 13px;
-  margin-left: 0;
-  margin-right: 0;
-  height: 50px;
-  width: 200px;
-  left: 1250px;
   margin-top: 10px;
+  height:auto;
+  width: 200px;
+  
+  
+  float: right;
 }
 
 /* ----------------The Modal ------------------------- */
@@ -38,7 +44,7 @@ body
 .modal 
 {
   display: none; 
-  position: fixed; 
+   
   z-index: 1; 
   left: 0;
   top: 0;
@@ -85,35 +91,36 @@ body
 /*----------------------main_container--------------------------------*/
 .maincontainer 
 {
-  position: absolute;
-  width: 40%;
+  display: flex;
+  margin: auto;
+  width: 50%;
+  height: 550px;
   padding: 10px;
-  margin-left: 400px;
-  margin-top: 130px;
-  
+  background-color: #DDDDDD;
 }
 
 .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
+    display: flex;
+    width: 50%;
+    margin: auto;
     position: relative;
   }
 
   /*game_name*/
 .gamename 
-{    
-  padding: 10px; 
-  width: 40%;
-  margin-left: 140px;
+{
+  display: flex;
+  margin-top: 70%; 
 }
 
 /*start button*/
 .play
   {
-    position: absolute;
-    padding: 17px;
-    left: 250px;
-    width: 150px;
+    
+    display: flex;  
+    padding: 10px; 
+    width: 50%;
+    margin: auto;
   }
 
 /* input fields */
@@ -149,6 +156,14 @@ button:hover
   opacity: 0.8;
 }
 
+#loading{
+  position: absolute;
+  width: 40px;
+  margin-left: 645px;
+  bottom: 360px;
+  
+}
+
 /*---------------------- Add Zoom Animation----------------------*/
 .animate 
 {
@@ -166,4 +181,261 @@ button:hover
 {
   from {transform: scale(0)} 
   to {transform: scale(1)}
+}
+/*----------------------------------------------------------------------------------------------------*/
+ 
+#usercont{
+  position: relative;
+  float: right;
+  color: #DDDDDD;
+  font-size: 50px;
+  margin-left: 300px;
+  left: 100px;
+  top: 10px;
+}
+#oppcont{
+  position: relative;
+  float: right;
+  color: #DDDDDD;
+  font-size: 50px;
+  margin-left: 300px;
+  left: 500px;
+  top: 70px;
+}
+
+#timer{
+  position: relative;
+  float: right;
+  color: black;
+  font-size: 50px;
+  margin-left: 300px;
+  left: 90px;
+  top: 100px;
+}
+
+
+/* chat container*/
+
+.chatcontainer{
+  position: relative;
+  background-color: cornsilk;
+  width: 30%;
+  height: 250px;
+  float: right;
+  top: 350px;
+  right: 20px;
+  border: #7a3b3b solid;
+}
+
+.chatt{
+  position: relative;
+}
+.chattext{
+position: absolute;
+ width: 70%;
+ height: 10%; 
+ margin-top: 250px;
+ margin-left: 10px;
+ top: 210px;
+ right: 40px;
+}
+
+.send{
+  position: absolute;
+  height: 15%;
+  width: 15%;
+  top: 215px;
+  left: 330px;
+  text-align: center;
+  padding: 3px;
+}
+
+/*play board*/
+
+.playbord{
+  position: relative;
+  display: flex;
+  background-color: #f1c232 ;
+  width: 65%;
+  height: 520px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border: brown solid;
+}
+
+.card{
+
+  background-color: #990000;
+  border: black solid 1px;
+}
+
+/*--------------------player1 cards-------------------*/
+.oneone{
+  position: absolute;
+  background-color: #DDDDDD; 
+  width: 500px;
+  height: 100px;
+  margin-left: 30%;
+}
+.one{
+  position: absolute;
+  width: 60px;
+  height: 80px; 
+  }
+
+#o1{
+  
+  left: 550px;
+}
+#o2{
+  left: 500px;
+}
+#o3{
+  left:450px;
+}
+#o4{
+  left: 400px;
+}
+#o5{
+  left:350px;
+}
+.pic1{
+
+  width: 40px; 
+  height: 40px; 
+  transform: scaleY(-1);
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+
+
+/*----------------------player3 cards----------------*/
+.threethree{
+  
+  width: 500px;
+  height: 100px;
+  margin-top: 40%;
+}
+.three{
+  position: absolute;
+  top: 437px;
+  width: 60px;
+  height: 80px;  
+}
+#th1{
+  left: 550px;
+}
+#th2{
+  left: 500px;
+}
+#th3{
+  left:450px;
+}
+#th4{
+  left: 400px;
+}
+#th5{
+  left:350px;
+}
+.pic3{
+  width: 40px; 
+  height: 40px;
+  margin-top: 20px;
+  margin-left: 10px;  
+}
+
+
+
+/*-----------------------main card --------------------------*/
+.five{
+  position: absolute;
+  top: 250px;
+  left: 400px;
+  width: 90px;
+  height: 110px;
+  text-align: center;
+  font-size: larger;
+  
+  
+}
+/*---------------card color---------------------------------*/
+.five.red{
+  color: #990000;
+  
+}
+.five.black{
+  color: black;
+}
+.five.green{
+  color: green;
+}
+.five.blue{
+  color: blue;
+}
+.five.pink{
+  color: pink;
+}
+.five.purple{
+  color: purple;
+}
+.five.orange{
+  color: orangered
+}
+.five.yellow{
+  color: yellow;
+}
+/*----------------background color--------------------------------------*/
+.five.Red{
+  background-color: #990000;
+}
+.five.White{
+  background-color: white;
+}
+.five.Green{
+  background-color: green;
+}
+.five.Blue{
+  background-color: blue;
+}
+.five.Pink{
+  background-color: pink;
+}
+.five.Purple{
+  background-color: purple;
+}
+.five.Orange{
+  background-color: orangered
+}
+.five.Yellow{
+  background-color: yellow;
+}
+
+.choice{
+  position: absolute;
+  width: 60px;
+  
+  height: 30px;
+}
+#choice1{
+  top:350px;
+  left: 300px;
+}
+
+#choice2{
+  top:350px;
+  left: 390px;
+}
+
+#choice3{
+  top:350px;
+  left: 480px;
+}
+
+#timer{
+  background-color: white;
+  width: 60px;
+  text-align: center;
+  font-size: 30px;
+
 }
