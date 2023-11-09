@@ -80,12 +80,36 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
+.section-subheading{
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
 
-html{
+.section-heading{
+    font-size: 3rem;
+    max-width: 600px;
+    font-weight: 700;
+    line-height: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.section-heading.left{
+    margin-right: auto;
+}
+
+
+.section-heading.right{
+    margin-left: auto;
+}
+
+/*html{
 
     scroll-behavior: smooth;
     overflow: hidden;
-}
+}*/
+
+
 
 body{
     
@@ -126,4 +150,49 @@ header{
 
 header .right{
     gap: 1rem;
+}
+
+#home{
+    min-height: 100vh;
+}
+ 
+.home_contant{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home_contant h1{
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.home_contant p{
+   font-size: 1.2rem; 
+   font-weight: 300;
+   margin-bottom: 1rem;
+}
+
+.home_img{
+    width: 100%;
+}
+
+
+.features{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature{
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid var(--color);
+}
+
+@media  screen and (max-width:768px) {
+    
 }
